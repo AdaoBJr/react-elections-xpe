@@ -86,6 +86,11 @@ export const theme = createTheme(
         fontSize: '1rem',
         fontWeight: 600,
       },
+      h3: {
+        color: '#4A4A4A',
+        fontSize: '.875rem',
+        fontWeight: 600,
+      },
       body1: {
         color: '#4A4A4A',
         fontWeight: 400,
