@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { electionInfo } from 'articles';
 import { GetElection } from 'types/domain';
-import { TextProps, TitleProps } from 'types/shared';
+import { CardProps, TextProps, TitleProps } from 'types/shared';
 
 import Thor from 'assets/images/thor.png';
 import Flash from 'assets/images/flash.png';
@@ -53,7 +53,7 @@ export const useElection = () => {
     );
   }, [electionData, location.state.election]);
 
-  const cardInfo = useMemo(() => {
+  const cardInfo = useMemo<CardProps[]>(() => {
     const info = electionData.map(({ candidateId, votes }) => {
       const percent = ((votes / electionInfoCity!.presence) * 100).toLocaleString(
         'pt-BR',
@@ -91,8 +91,6 @@ export const useElection = () => {
       .map((info, i) => ({ ...info, elected: i === 0 ? 'Eleito' : 'Não Eleito' }));
   }, [electionData, candidates, electionInfoCity?.presence]);
 
-  console.log({ electionData, location, candidates, cardInfo });
-
   const compProps = useMemo(
     () => ({
       title: {
@@ -123,8 +121,9 @@ export const useElection = () => {
         variant: 'body1',
         textAlign: 'center',
       } as TextProps,
+      cardInfo,
     }),
-    [electionData, electionInfoCity]
+    [electionData, electionInfoCity, cardInfo]
   );
 
   return { compProps };

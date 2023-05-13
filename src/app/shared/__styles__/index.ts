@@ -14,5 +14,5 @@ export const PaperWrapper: SxProps<Theme> = {
   gap: 0.5,
   p: '1rem 1.5rem',
   width: { xs: '100%', md: '1000px' },
-  height: { xs: '100%', md: '450px' },
+  height: '100%',
 };
