@@ -8,7 +8,11 @@ import { Title, Animation, Text, Dropdown } from 'app/shared';
 export const Home: React.FC = () => {
   const {
     data,
-    compProps: { loadingAnimation, homeAnimation, title, label, dropdown, button },
+    compProps: {
+      loadingAnimation,
+      homeAnimation,
+      title, label, dropdown, button
+    },
   } = useHome();
 
   if (!data)
@@ -20,9 +24,9 @@ export const Home: React.FC = () => {
 
   return (
     <BodyHome>
+      <Animation {...homeAnimation} />
       <Title {...title} />
       <Text {...label} />
-      <Animation {...homeAnimation} />
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
           <Dropdown {...dropdown} />

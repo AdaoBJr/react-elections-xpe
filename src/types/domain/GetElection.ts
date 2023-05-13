@@ -1,4 +1,4 @@
-interface Cities {
+interface City {
   id: string;
   name: string;
   votingPopulation: number;
@@ -6,7 +6,7 @@ interface Cities {
   presence: number;
 }
 
-interface Candidates {
+interface Candidate {
   id: string;
   name: string;
   username: string;
@@ -19,8 +19,8 @@ interface Election {
   votes: number;
 }
 
-export interface GetElections {
-  cities: Cities[];
-  candidates: Candidates[];
+export interface GetElection {
+  cities: City[];
+  candidates: Candidate[];
   election: Election[];
 }

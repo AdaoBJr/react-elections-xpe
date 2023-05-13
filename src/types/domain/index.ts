@@ -1,1 +1,1 @@
-export * from './GetElections';
+export * from './GetElection';

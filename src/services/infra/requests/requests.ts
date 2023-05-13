@@ -1,14 +1,14 @@
 import { api } from '../api';
 import { getEnv } from 'environment';
-import { GetElections } from 'types/domain';
+import { GetElection } from 'types/domain';
 
-export const useInvestimentsApi = () => {
+export const useElectionApi = () => {
   const { URL_BASE } = getEnv();
 
-  const getInvestiments = async () => {
-    const res = await api.get<GetElections>(URL_BASE);
+  const getElection = async () => {
+    const res = await api.get<GetElection>(URL_BASE);
     return res.data;
   };
 
-  return { getInvestiments };
+  return { getElection };
 };

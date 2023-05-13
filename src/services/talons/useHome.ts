@@ -2,8 +2,8 @@ import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { home } from 'articles';
-import { GetInvestments } from 'types/domain';
-import { useInvestimentsApi } from 'services/infra';
+import { GetElection } from 'types/domain';
+import { useElectionApi } from 'services/infra';
 import homeAnimation from 'assets/animations/home.json';
 import loadingAnimation from 'assets/animations/loading.json';
 import {
@@ -17,26 +17,23 @@ import { ButtonProps } from '@mui/material';
 
 export const useHome = () => {
   const navigate = useNavigate();
-  const { getInvestiments } = useInvestimentsApi();
+  const { getElection } = useElectionApi();
 
-  const [data, setData] = useState<GetInvestments | null>(null);
+  const [data, setData] = useState<GetElection | null>(null);
   const [dropdownValue, setDropdownValue] = useState<string>('');
 
-  const getInvest = async () => {
-    const data = await getInvestiments();
-    setData(data);
-  };
+  const getData = async () => setData(await getElection());
 
   const handleSelectOnBlur = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
     setDropdownValue(value);
 
-  const handleRedirect = () => navigate(`/investment/${dropdownValue}`, { state: data });
+  const handleRedirect = () => navigate(`/election/${dropdownValue}`, { state: data });
 
   const dropItems: DropdownItems[] | undefined = useMemo(
     () =>
-      data?.investments.map(({ id, description }) => ({
-        value: id,
-        label: description,
+      data?.cities.map(({ name }) => ({
+        value: name,
+        label: name,
       })),
     [data]
   );
@@ -67,7 +64,7 @@ export const useHome = () => {
         textAlign: 'center',
       } as TextProps,
       dropdown: {
-        name: 'dropdown_investiments',
+        name: 'dropdown_election',
         defaultValue: '',
         label: !dropdownValue && home.placeholder,
         fullWidth: true,
@@ -87,11 +84,11 @@ export const useHome = () => {
         },
       } as ButtonProps,
     }),
-    [dropItems, dropdownValue]
+    [dropdownValue, dropItems]
   );
 
   useEffect(() => {
-    getInvest();
+    getData();
   }, []);
 
   return { data, compProps };

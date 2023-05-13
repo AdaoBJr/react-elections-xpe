@@ -20,7 +20,7 @@ export const Header: React.FC = () => (
     </Tooltip>
 
     <Title variant="h1" color="text.primary" alignSelf={'center'}>
-      React Investimentos - XPe
+      {header.title}
     </Title>
   </Box>
 );
